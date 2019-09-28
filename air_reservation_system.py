@@ -77,7 +77,7 @@ class Aircraft:
         rows, row_seats = self.seating_plan()
         return len(rows) * len(row_seats)
 
-def
+
 
 
 class AirbusA319(Aircraft):
@@ -88,11 +88,18 @@ class AirbusA319(Aircraft):
     def seating_plan(self):
         return range(1, 23), 'ABCDEF'
 
+
 #TODO
 def console_card_printer(passenger, seat, flight_number, aircraft):
-    #Zrobić piękny wydruk ze ślaczkami
+    # Zrobić piękny wydruk ze ślaczkami
+    # frame_1 = f'+ {"-"*200}+'
+    # print(frame_1)
+    # frame = f'+{"-" * (len(name) + 2)}+'
+    # text = f'| {name} |'
+    # list_of_lines = [frame, frame, frame, text, frame, frame, frame]
+    # output = '\n'.join(list_of_lines)
+    # print(output)
     pass
-
 
 
 airbus = AirbusA319()
@@ -108,7 +115,9 @@ f.allocate_seat('10B', 'Lech K')
 f.allocate_seat('10C', 'Mateusz M')
 # pp.pprint(f._seating)
 print(f.num_available_seats())
-f.make_boarding_cards(console_card_printer)
+# f.make_boarding_cards(console_card_printer)
+console_card_printer("x","23","fd","34")
+
 
 
 
