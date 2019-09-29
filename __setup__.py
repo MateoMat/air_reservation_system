@@ -1,0 +1,2 @@
+
+# informacja jak zainstalować paczkę
