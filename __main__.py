@@ -1,0 +1,1 @@
+# Informacja dotycząca całej aplikacji
