@@ -50,9 +50,16 @@ class Flight:
 
         #TODO homework
     def relocate_seat(self, from_seat, to_seat):
-        pass
+        to_row, to_letter = self._parse_seat(to_seat)
+        if self._seating[to_row][to_letter] is not None:
+            raise ValueError(f'Seat {to_seat} already occupied - can not relocate')
+        from_row, from_letter = self._parse_seat(from_seat)
+        passenger = self._seating[from_row][from_letter]
+        self._seating[from_row][from_letter] = None
+        self._seating[to_row][to_letter] = passenger
 
-    def num_available_seats(self):
+
+def num_available_seats(self):
         return sum(sum(1 for seat in row.values() if seat is None)
                    for row in self._seating
                    if row is not None)
@@ -65,7 +72,7 @@ class Flight:
         row_numbers, seat_letters = self.aircraft.seating_plan()
 
         for row in row_numbers:
-            for seat_letters in seat_letters:
+            for letter in seat_letters:
                 passenger = self._seating[row][letter]
                 if passenger is not None:
                     # yield to return na po - wywołując go tyle razy ile jest elementów zawsze zwraca kolejny
@@ -78,28 +85,22 @@ class Aircraft:
         return len(rows) * len(row_seats)
 
 
-
-
 class AirbusA319(Aircraft):
-
+    
     def get_model(self):
         return 'Airbus A319'
+
 
     def seating_plan(self):
         return range(1, 23), 'ABCDEF'
 
 
-#TODO
 def console_card_printer(passenger, seat, flight_number, aircraft):
-    # Zrobić piękny wydruk ze ślaczkami
-    # frame_1 = f'+ {"-"*200}+'
-    # print(frame_1)
-    # frame = f'+{"-" * (len(name) + 2)}+'
-    # text = f'| {name} |'
-    # list_of_lines = [frame, frame, frame, text, frame, frame, frame]
-    # output = '\n'.join(list_of_lines)
-    # print(output)
-    pass
+   frame = f'+{"-" * (len(passenger) + len(seat) + len(flight_number) + len(aircraft) + 30)}+'
+   text = f'| {passenger}, seat:{seat}, flight#:{flight_number}, aircraft:{aircraft} |'
+   list_of_lines = [frame, text, frame]
+   output = '\n'.join(list_of_lines)
+   print(output)
 
 
 airbus = AirbusA319()
@@ -116,7 +117,7 @@ f.allocate_seat('10C', 'Mateusz M')
 # pp.pprint(f._seating)
 print(f.num_available_seats())
 # f.make_boarding_cards(console_card_printer)
-console_card_printer("x","23","fd","34")
+f.make_boarding_cards(console_card_printer)
 
 
 
